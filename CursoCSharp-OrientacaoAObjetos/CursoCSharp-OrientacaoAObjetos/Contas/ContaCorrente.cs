@@ -13,6 +13,8 @@ namespace CursoCSharp_OrientacaoAObjetos.Contas
         // Com static a propriedade passa a ser da classe e não dos objetos criados a partir dela
         public static int TotalDeContasCriadas { get; private set; }
 
+        public static float TaxaOperacao { get; private set; }
+
         private int numeroAgencia;
         // Propriedade pública
         public int NumeroAgencia
@@ -51,7 +53,7 @@ namespace CursoCSharp_OrientacaoAObjetos.Contas
             }
             else
             {
-                return false;
+                throw new SaldoInsuficienteException("Saldo insuficiente para a operação!");
             }
         }
 
@@ -103,6 +105,28 @@ namespace CursoCSharp_OrientacaoAObjetos.Contas
         {
             this.NumeroAgencia = numeroAgencia;
             this.Conta = numeroConta;
+
+            if (numeroAgencia <= 0)
+            {
+                // Lançando nova exceção
+                // Obs.: nameof => Converter o tipo da parâmetro para string
+                throw new ArgumentException("Número de agência menor ou igual a zero!", 
+                                            nameof(numeroAgencia));
+            }
+
+            /*
+            // Tratamento de exceção
+            try
+            {
+                TaxaOperacao = 30 / TotalDeContasCriadas;
+            }
+            // Passando o tipo de exceção no parâmetro do catch
+            catch(DivideByZeroException)
+            {
+                Console.WriteLine("Ocorreu um erro! Não é possível fazer uma divisão por zero!");
+            }
+            */
+
             TotalDeContasCriadas++;
         }
 
@@ -112,6 +136,7 @@ namespace CursoCSharp_OrientacaoAObjetos.Contas
             this.Titular = titular;
             this.NumeroAgencia = numeroAgencia;
             this.Conta = conta;
+
             TotalDeContasCriadas++;
         }
     }

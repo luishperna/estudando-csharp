@@ -22,5 +22,12 @@ namespace CursoCSharp_OrientacaoAObjetos.Titular
         {
             TotalClientesCadastrados++;
         }
+
+        //public override string ToString()
+        //{
+        //    return $"Nome: {this.Nome},\n" +
+        //           $"CPF: {this.Cpf},\n" +
+        //           $"Profissao: {this.Profissao}";
+        //}
     }
 }
